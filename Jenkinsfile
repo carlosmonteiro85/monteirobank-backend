@@ -43,7 +43,7 @@ pipeline {
                     // Analisa o código com o SonarQube
                     echo "Executando análise do SonarQube"
                     withSonarQubeEnv(SONARQUBE_SERVER) {
-                        sh 'mvn sonar:sonar -Dsonar.projectKey=monteiro-bank -Dsonar.host.url=http://192.168.100.2:9000 -Dsonar.login=sqp_e9e21dd44743fa731412112d2e21681048ad8179'
+                        sh 'mvn sonar:sonar -Dsonar.projectKey=monteiro-bank -Dsonar.host.url=http://192.168.100.2:9000 -Dsonar.login=${SONAR_KEY}
                     }
                 }
             }
