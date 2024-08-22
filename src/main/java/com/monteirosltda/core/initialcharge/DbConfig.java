@@ -2,26 +2,32 @@ package com.monteirosltda.core.initialcharge;
 
 import java.util.Objects;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Configuration
 public class DbConfig {
 
-	@Autowired
-	private DbService dbService;
-	
+	private final DbService dbService;
+
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String ddlAuto;
 
+	public DbConfig(DbService dbService) {
+		this.dbService = dbService;
+	}
+
 	@Bean
 	void instanceDb() {
-		if(Objects.equals(ddlAuto, "create-drop")) {
+		if (Objects.equals(ddlAuto, "update")) {
 
-			System.out.println("Criando...");
+			log.info("Inicializando carga ...");
 			dbService.carregarCargaInicialFile();
+			log.info("Inicializando carga ...");
 		}
 	}
 }
