@@ -14,20 +14,20 @@ public class DbConfig {
 
 	private final DbService dbService;
 
-	public DbConfig(DbService dbService) {
-		this.dbService = dbService;
-	}
-	
 	@Value("${spring.jpa.hibernate.ddl-auto}")
 	private String ddlAuto;
 
+	public DbConfig(DbService dbService) {
+		this.dbService = dbService;
+	}
+
 	@Bean
 	void instanceDb() {
-		if(Objects.equals(ddlAuto, "create-drop")) {
+		if (Objects.equals(ddlAuto, "update")) {
 
-			log.info("Iniciando carga...");
+			log.info("Inicializando carga ...");
 			dbService.carregarCargaInicialFile();
-			log.info("Carga finalizada...");
+			log.info("Inicializando carga ...");
 		}
 	}
 }
