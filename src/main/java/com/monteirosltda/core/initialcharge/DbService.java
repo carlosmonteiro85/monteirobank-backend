@@ -1,6 +1,6 @@
 package com.monteirosltda.core.initialcharge;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 import com.monteirosltda.domain.model.Conta;
@@ -9,32 +9,32 @@ import com.monteirosltda.domain.repository.ContaRepository;
 import com.monteirosltda.domain.repository.UserRepository;
 import com.monteirosltda.domain.service.AuthenticationService;
 
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
 @Component
 public class DbService {
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private AuthenticationService authenticationService;
-
-    @Autowired
-    private ContaRepository contaRepository;
-	
+    private final UserRepository userRepository;
+    private final AuthenticationService authenticationService;
+    private final ContaRepository contaRepository;
 	
 	public void carregarCargaInicialFile() {
 		
-        DbStub.getUsers().forEach(user -> authenticationService.register(user));
+        DbStub.getUsers().forEach(authenticationService::register);
 
-        User user1 = userRepository.findByEmail("enzo.monteiro").get();
-        User user2 = userRepository.findByEmail("ana.monteiro").get();
+        Optional<User> user1 = userRepository.findByEmail("enzo.monteiro");
+        Optional<User> user2 = userRepository.findByEmail("ana.monteiro");
 
-        Conta conta1 = DbStub.criateConta(user1);
-        contaRepository.save(conta1);
-        
-        Conta conta2 = DbStub.criateConta(user2);
-        contaRepository.save(conta2);
-		
+        if (user1.isPresent()) {
+            Conta conta1 = DbStub.criateConta(user1.get());
+            contaRepository.save(conta1);
+        }
+
+        if (user2.isPresent()) {
+            Conta conta2 = DbStub.criateConta(user2.get());
+            contaRepository.save(conta2);
+        }
 	}
 }
 
