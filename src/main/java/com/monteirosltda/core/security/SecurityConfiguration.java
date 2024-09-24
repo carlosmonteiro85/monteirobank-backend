@@ -27,6 +27,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.monteirosltda.core.jwt.JwtAuthenticationFilter;
 
@@ -45,8 +46,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
       http
-          .csrf()
-          .disable()
+          .csrf(csrf -> csrf.ignoringRequestMatchers(AntPathRequestMatcher.antMatcher("/h2-console/**")))
+          // .disable()
           .authorizeHttpRequests()
           .requestMatchers(
                   "/api/v1/auth/**",
@@ -59,7 +60,8 @@ public class SecurityConfiguration {
                   "/configuration/security",
                   "/swagger-ui/**",
                   "/webjars/**",
-                  "/swagger-ui.html"
+                  "/swagger-ui.html",
+                  "/h2-console/**"
           ).permitAll()
           .requestMatchers("/api/v1/management/**").hasAnyRole(ADMIN.name(), MANAGER.name(), SON.name())
           .requestMatchers(GET, "/api/v1/management/**").hasAnyAuthority(ADMIN_READ.name(), MANAGER_READ.name())

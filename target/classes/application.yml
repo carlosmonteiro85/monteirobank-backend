@@ -1,16 +1,9 @@
 spring:
   datasource:
-<<<<<<< HEAD
-    url: jdbc:h2:file:./data/bank
-    username: sa
-    password: 
-    driver-class-name: org.h2.Driver
-=======
     url: jdbc:mysql://192.168.100.2:3306/monteiros_ltda?createDatabaseIfNotExist=true&serverTimezone=GMT-3&useSSL=false&serverTimezone=UTC
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
->>>>>>> develop
   jpa:
     hibernate:
       ddl-auto: none # para criação da carga inicial usar o create-drop depois mudar para 'none'
