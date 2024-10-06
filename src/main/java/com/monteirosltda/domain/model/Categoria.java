@@ -1,5 +1,6 @@
 package com.monteirosltda.domain.model;
 
+import com.monteirosltda.api.dto.CategoriaDto;
 import com.monteirosltda.domain.model.enuns.TipoCategoriaEnum;
 
 import jakarta.persistence.Column;
@@ -28,10 +29,18 @@ public class Categoria {
     @Enumerated(EnumType.STRING)
     private TipoCategoriaEnum tipoCategoria;
 
-    public static Categoria toEntity(com.monteirosltda.api.dto.CategoriaDto dto){
+    public static Categoria toEntity(CategoriaDto dto){
         Categoria categoria = new Categoria();
         categoria.setDescricao(dto.getDescricao());
         categoria.setTipoCategoria(TipoCategoriaEnum.findByCod(dto.getTipoCategoria()));
         return categoria;
+    }
+
+    public static CategoriaDto toDto(Categoria categoria){
+        CategoriaDto dto = new CategoriaDto();
+        dto.setId(categoria.getId());
+        dto.setDescricao(categoria.getDescricao());
+        dto.setTipoCategoria(categoria.getTipoCategoria().getCod());
+        return dto;
     }
 }

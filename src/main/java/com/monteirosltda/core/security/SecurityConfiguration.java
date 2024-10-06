@@ -48,6 +48,8 @@ public class SecurityConfiguration {
           .disable()
           .authorizeHttpRequests()
           .requestMatchers(
+                  "/api/dominios",
+                  "/api/dominios/**",
                   "/api/categoria",
                   "/api/v1/auth/**",
                   "/v2/api-docs",

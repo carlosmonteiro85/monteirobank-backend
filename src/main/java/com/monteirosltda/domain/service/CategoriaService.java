@@ -1,9 +1,12 @@
 package com.monteirosltda.domain.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.monteirosltda.api.dto.CategoriaDto;
 import com.monteirosltda.domain.model.Categoria;
+import com.monteirosltda.domain.model.enuns.TipoCategoriaEnum;
 import com.monteirosltda.domain.repository.CategoriaRepository;
 
 @Service
@@ -18,5 +21,10 @@ public class CategoriaService {
     public void save(CategoriaDto dto) {
         Categoria categoria = Categoria.toEntity(dto);
         categoriaRepository.save(categoria);
+    }
+
+    public List<Categoria> findAllForType(Integer cod) {
+        TipoCategoriaEnum tipoCategoria = TipoCategoriaEnum.findByCod(cod);
+        return categoriaRepository.findCategoriasByTipoCategoria(tipoCategoria);
     }
 }
