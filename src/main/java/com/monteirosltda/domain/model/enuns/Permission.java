@@ -15,12 +15,7 @@ public enum Permission {
 	MANAGER_UPDATE("management:update"), 
 	MANAGER_CREATE("management:create"),
 	MANAGER_DELETE("management:delete"), 
-	MANAGER_LOGGER("management:logger"),
-	SON_CHECK_PAY("son:checkpay"), 
-	SON_CHECK_TASK("son:checktask"), 
-	SON_READ_TASK("son:readtask"), 
-	SON_SAC_PAY("son:sacpay"), 
-	SON_LOGGER("son:logger");
+	MANAGER_LOGGER("management:logger");
 
 	@Getter
 	private final String permission;

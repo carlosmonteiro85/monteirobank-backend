@@ -14,11 +14,6 @@ import static com.monteirosltda.domain.model.enuns.Permission.MANAGER_DELETE;
 import static com.monteirosltda.domain.model.enuns.Permission.MANAGER_READ;
 import static com.monteirosltda.domain.model.enuns.Permission.MANAGER_UPDATE;
 import static com.monteirosltda.domain.model.enuns.Permission.MANAGER_LOGGER;
-import static com.monteirosltda.domain.model.enuns.Permission.SON_CHECK_PAY;
-import static com.monteirosltda.domain.model.enuns.Permission.SON_CHECK_TASK;
-import static com.monteirosltda.domain.model.enuns.Permission.SON_READ_TASK;
-import static com.monteirosltda.domain.model.enuns.Permission.SON_SAC_PAY;
-import static com.monteirosltda.domain.model.enuns.Permission.SON_LOGGER;
 
 import java.util.Collections;
 import java.util.List;
@@ -50,17 +45,7 @@ public enum Role {
                   MANAGER_CREATE,
                   MANAGER_LOGGER
           )
-  ),
-SON(
-        Set.of(
-                SON_CHECK_PAY,
-                SON_CHECK_TASK,
-                SON_READ_TASK,
-                SON_SAC_PAY,
-                SON_LOGGER
-        )
   )
-
   ;
 
   @Getter
