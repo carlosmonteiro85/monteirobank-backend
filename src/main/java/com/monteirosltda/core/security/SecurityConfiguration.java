@@ -51,6 +51,7 @@ public class SecurityConfiguration {
                   "/api/dominios",
                   "/api/dominios/**",
                   "/api/categoria",
+                  "/api/lancamento",
                   "/api/v1/auth/**",
                   "/v2/api-docs",
                   "/v3/api-docs",
