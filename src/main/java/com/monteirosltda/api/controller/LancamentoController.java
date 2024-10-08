@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.monteirosltda.api.dto.CategoriaDto;
 import com.monteirosltda.api.dto.LancamentoDTO;
-import com.monteirosltda.domain.service.CategoriaService;
+import com.monteirosltda.domain.service.LancamentoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,16 +16,16 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("api/lancamento")
 public class LancamentoController {
     
-    // private final CategoriaService service;
+    private final LancamentoService lancamentoService;
 
-    // public CategoriaController(CategoriaService service) {
-    //     this.service = service;
-    // }
+    public LancamentoController(LancamentoService lancamentoService) {
+        this.lancamentoService = lancamentoService;
+    }
 
     @PostMapping
     public ResponseEntity<Void> criar(@RequestBody LancamentoDTO lancamentoDTO){
-        // service.save(categotia);
-        log.info("" + lancamentoDTO);
+        lancamentoService.create(lancamentoDTO);
+        log.info("Criando lançamento: " + lancamentoDTO);
         return ResponseEntity.ok().build();
     }
 }

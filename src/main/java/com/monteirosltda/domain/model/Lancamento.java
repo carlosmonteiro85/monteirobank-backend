@@ -6,7 +6,6 @@ import java.util.Objects;
 
 import com.monteirosltda.api.dto.LancamentoDTO;
 import com.monteirosltda.domain.model.enuns.StatusEnum;
-import com.monteirosltda.domain.model.util.DataUtil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -53,11 +52,11 @@ public class Lancamento {
     public static LancamentoDTO toDto(Lancamento lancamento){
         LancamentoDTO dto = new LancamentoDTO();
         dto.setId(lancamento.getId());
-        dto.setDataCadastro(DataUtil.formatarDataParaString(lancamento.getDataCadastro()));
+        dto.setDataCadastro(lancamento.getDataCadastro());
         dto.setIdCategoria(null);
         dto.setDescricao(lancamento.getDescricao());
         dto.setValor(lancamento.getValor());
-        dto.setPagoEm(DataUtil.formatarDataParaString(lancamento.getPagoEm()));
+        dto.setPagoEm(lancamento.getPagoEm());
         dto.setCodStatus(lancamento.getStatus().getCod());
         return dto;
     }
@@ -65,11 +64,11 @@ public class Lancamento {
     public static Lancamento toEntity(LancamentoDTO dto, Categoria categoria){
         Lancamento lancamento = new Lancamento();
         lancamento.setId(Objects.nonNull(dto.getId()) ? dto.getId() : null);
-        lancamento.setDataCadastro(DataUtil.parseStringParaData(dto.getDataCadastro()));
+        lancamento.setDataCadastro(dto.getDataCadastro());
         lancamento.setCategoria(categoria);
         lancamento.setDescricao(dto.getDescricao());
         lancamento.setValor(dto.getValor());
-        lancamento.setPagoEm(DataUtil.parseStringParaData(dto.getPagoEm()));
+        lancamento.setPagoEm(dto.getPagoEm());
         lancamento.setStatus(StatusEnum.findByCod(dto.getCodStatus()));
         return lancamento;
     }
