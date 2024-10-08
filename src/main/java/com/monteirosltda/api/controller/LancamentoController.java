@@ -1,12 +1,18 @@
 package com.monteirosltda.api.controller;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.monteirosltda.api.dto.LancamentoDTO;
+import com.monteirosltda.api.dto.LancamentoListItemDTO;
 import com.monteirosltda.domain.service.LancamentoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,4 +34,19 @@ public class LancamentoController {
         log.info("Criando lançamento: " + lancamentoDTO);
         return ResponseEntity.ok().build();
     }
+
+	@GetMapping("/{cod}")
+	public ResponseEntity<List<LancamentoListItemDTO>> findAll(@PathVariable("cod") Integer cod) {
+		List<LancamentoListItemDTO> lancamentos = lancamentoService.findByTipoCategoria(cod);
+		if(lancamentos.isEmpty()){
+			return ResponseEntity.noContent().build();
+		}
+		return ResponseEntity.ok(lancamentos); 
+	}
+
+    @GetMapping("impacto/{id}")
+	public ResponseEntity<BigDecimal> inpactoReceita(@PathVariable("id") Long cod) {
+		 BigDecimal impactoOrcamento = lancamentoService.getImpactoOrcamento(cod);
+		return ResponseEntity.ok(impactoOrcamento); 
+	}
 }

@@ -5,7 +5,9 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 import com.monteirosltda.api.dto.LancamentoDTO;
+import com.monteirosltda.api.dto.LancamentoListItemDTO;
 import com.monteirosltda.domain.model.enuns.StatusEnum;
+import com.monteirosltda.domain.model.util.Utilitarios;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,7 +34,7 @@ public class Lancamento {
     @Column(name = "data_cadastro")
     private LocalDate dataCadastro; 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="categoria_id")
     private Categoria categoria;
 
@@ -41,6 +43,9 @@ public class Lancamento {
 
     @Column(name = "valor")
     private BigDecimal valor;
+
+    @Column(name = "vencimento")
+    private LocalDate dataVencimento;
 
     @Column(name = "pago_em")
     private LocalDate pagoEm;
@@ -56,7 +61,21 @@ public class Lancamento {
         dto.setIdCategoria(null);
         dto.setDescricao(lancamento.getDescricao());
         dto.setValor(lancamento.getValor());
+        dto.setDataVencimento(lancamento.getDataVencimento());
         dto.setPagoEm(lancamento.getPagoEm());
+        dto.setCodStatus(lancamento.getStatus().getCod());
+        return dto;
+    }
+
+    public static LancamentoListItemDTO toDtoItemList(Lancamento lancamento){
+        LancamentoListItemDTO dto = new LancamentoListItemDTO();
+        dto.setId(lancamento.getId());
+        dto.setDataCadastro(lancamento.getDataCadastro());
+        dto.setCategoria(lancamento.getCategoria().getDescricao());
+        dto.setDescricao(lancamento.getDescricao());
+        dto.setValor(Utilitarios.formataValor(lancamento.getValor()));
+        dto.setPagoEm(lancamento.getPagoEm());
+        dto.setDataVencimento(lancamento.getDataVencimento());
         dto.setCodStatus(lancamento.getStatus().getCod());
         return dto;
     }
@@ -69,6 +88,7 @@ public class Lancamento {
         lancamento.setDescricao(dto.getDescricao());
         lancamento.setValor(dto.getValor());
         lancamento.setPagoEm(dto.getPagoEm());
+        lancamento.setDataVencimento(dto.getDataVencimento());
         lancamento.setStatus(StatusEnum.findByCod(dto.getCodStatus()));
         return lancamento;
     }

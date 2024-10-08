@@ -6,12 +6,13 @@ import java.time.LocalDate;
 import lombok.Data;
 
 @Data
-public class LancamentoDTO {
+public class LancamentoListItemDTO {
     private Long id;
     private LocalDate dataCadastro;
-    private Long idCategoria;
+    private String categoria;
     private String descricao;
-    private BigDecimal valor;
+    private String valor;
+    private BigDecimal impactoReceita;
     private LocalDate pagoEm;
     private LocalDate dataVencimento;
     private Integer codStatus;

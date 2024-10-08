@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.monteirosltda.api.dto.CategoriaDto;
-import com.monteirosltda.domain.model.util.VersaoUtil;
 import com.monteirosltda.domain.service.DominiosService;
 
 import lombok.RequiredArgsConstructor;
