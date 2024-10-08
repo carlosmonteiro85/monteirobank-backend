@@ -21,3 +21,6 @@ application:
       expiration: 86400000 # 1 day in milliseconds
       refresh-token:
         expiration: 604800000 # 7 days in milliseconds
+
+app:
+  version: v0.0.1

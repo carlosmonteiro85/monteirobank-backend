@@ -6,7 +6,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum StatusEnum {
-    PENDENTE(1), CONCLUIDA(2);
+    PENDENTE(1), PAGO(2), VENCENDO(3);
 
     private Integer cod;
 
