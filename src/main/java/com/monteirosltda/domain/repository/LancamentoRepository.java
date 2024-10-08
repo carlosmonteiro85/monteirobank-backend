@@ -17,4 +17,7 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long>{
 
     @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE MONTH(l.dataCadastro) = :mes AND YEAR(l.dataCadastro) = :ano AND l.categoria.tipoCategoria = :tipoCategoria")
     BigDecimal somarValoresPorMesEAno(@Param("mes") int mes, @Param("ano") int ano, @Param("tipoCategoria") TipoCategoriaEnum tipoCategoria);
+
+    @Query("SELECT SUM(l.valor) FROM Lancamento l WHERE YEAR(l.dataCadastro) = :ano AND l.categoria.tipoCategoria = :tipoCategoria")
+    BigDecimal somarValoresPorAno(@Param("ano") int ano, @Param("tipoCategoria") TipoCategoriaEnum tipoCategoria);
 }

@@ -49,4 +49,19 @@ public class LancamentoController {
 		 BigDecimal impactoOrcamento = lancamentoService.getImpactoOrcamento(cod);
 		return ResponseEntity.ok(impactoOrcamento); 
 	}
+
+    @GetMapping("total-lancamentos/{codTipoCategoria}")
+	public String getTotalLancamentosMensais(@PathVariable("codTipoCategoria") Integer codTipoCategoria) {
+		 return lancamentoService.getTotalLancamentosMensais(codTipoCategoria);
+	}
+
+    @GetMapping("total-lancamentos-anual/{codTipoCategoria}")
+	public String getTotalLancamentosAnual(@PathVariable("codTipoCategoria") Integer codTipoCategoria) {
+		 return lancamentoService.getTotalLancamentosAnual(codTipoCategoria);
+	}
+
+    @GetMapping("porcentagens/{codTipoCategoria}")
+	public String getPorcentagens(@PathVariable("codTipoCategoria") Integer codTipoCategoria) {
+		 return lancamentoService.getPorcentagem(codTipoCategoria);
+	}
 }
